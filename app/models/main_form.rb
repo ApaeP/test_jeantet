@@ -1,0 +1,2 @@
+class MainForm < ApplicationRecord
+end

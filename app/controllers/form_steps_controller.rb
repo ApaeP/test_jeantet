@@ -1,0 +1,2 @@
+class FormStepsController < ApplicationController
+end
