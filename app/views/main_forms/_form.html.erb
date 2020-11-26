@@ -1,0 +1,12 @@
+<%= simple_form_for(main_form) do |f| %>
+  <%#= f.input :answers %>
+  <%#= f.input :answers, label: "#{decision[:question] unless decision[:question] == "Voulez-vous déclarer un incident ?"}", collection: decision[:answers], as: :radio_buttons %>
+  <%= f.submit 'oui' %>
+<% end %>
+
+
+<!-- answers: a_b  -->
+<!-- current_question = MainForm.next_question => :b -->
+<!-- question: MainForm::Tree[current_question][:question] -->
+<!-- answer1: "Oui" value: MainForm::Tree[current_question][:answers][:yes] => editer :answers << "" -->
+<!-- answer1: "Non" value: MainForm::Tree[current_question][:answers][:no] -->
