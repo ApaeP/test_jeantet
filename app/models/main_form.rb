@@ -1,27 +1,44 @@
 class MainForm < ApplicationRecord
 
   def next_step
-    if self.answers.nil?
-      TREE[:a]
-    else
-      TREE[self.answers.split('_').last.to_sym]
-    end
+    TREE[self.answers.split('_').last.to_sym]
   end
 
   def current_question
-    self.answers.split('_').last(3)[2]
+    self.answers.split('_').last.to_sym
   end
 
   def answer(question, answer)
     if self.answers.nil?
       self.answers = answer
     else
-      self.answers << "_#{ question.to_s }_#{ answer.to_s }_#{ TREE[question][:answers][answer] }"
+      if self.current_question != question
+        # A CORRIGER !!!!!!!!!!!!!
+        # self.answers = self.answers.split('_')[0...-3].join('_') + "_#{ question.to_s }_#{ answer.to_s }_#{ TREE[question][:answers][answer] }"
+        self.answers = self.answers[0..-self.answers.match(/#{question}(.*)/)[1].length - 2] << "_#{ question.to_s }_#{ answer.to_s }_#{ TREE[question][:answers][answer] }"
+      else
+        puts "\n \n \n \n \n ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n \n \n \n \n "
+        puts "TREE[la question a laquelle on répond][:answers] est nil ?"
+        p TREE[question][:answers].nil?
+        puts "\n \n \n \n \n ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n \n \n \n \n "
+        if TREE[question][:answers].nil?
+          self.answers
+        else
+          self.answers << "_#{ question.to_s }_#{ answer.to_s }_#{ TREE[question][:answers][answer] }"
+        end
+      end
     end
     self.save
   end
 
-
+# Si j'ai Object : a_yes_b_b_no_endA
+# que je suis sur la page de results de endA
+# que je fais retour sur la derniere question
+# et que j'essaie de repondre a nouveau
+# en cliquant sur yes je dois
+ # supprimer la string apres le premier b
+ # self.answers = self.answers[0..-self.answers.match(/#{interpolation de current_question}(.*)/)[1].length - 2]
+#
   # The answers are constructed like this :
       # answers =
         # 1 - nil
