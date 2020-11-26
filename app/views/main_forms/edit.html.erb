@@ -1,12 +1,10 @@
-<h1>Etape 1</h1>
-
-<div class="yo">
+<div class="yo" style="margin-top: 10vh;">
   <h3 style="text-align: center;"><%= @question[:question] %></h3>
   <% if @question[:precisions] != '' %>
     <h4>Précisions: <%= @question[:precisions] %></h4>
   <% end %>
 
-  <div>
+  <div style="margin-bottom: 7vh;">
     <h2 id="button-yes" class="question_buttons">OUI</h2>
     <h2 id="button-no" class="question_buttons">NON</h2>
   </div>
@@ -15,74 +13,26 @@
       <div class="answer_container">
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         <%= f.input :answers, label: "", collection: {
-          # yes: "a_yes_b",
           yes: "#{ @current_question }_yes_#{ @question[:answers][:yes] }",
           no: "#{ @current_question }_no_#{ @question[:answers][:no] }"
         }, as: :radio_buttons, input_html: { class: 'prout' } %>
       </div>
-      <%#= f.submit "OK", class: "btn btn-primary d-none" %>
     <% end %>
   </div>
 
   <hr>
-
-<% if @current_question.to_s.start_with?('end') %>
-  DETAILS FIN
-<% else %>
-  <p>question : <%= @current_question %> </p>
-  <p><%= @question %></p>
-  <div>
-    <p>OUI : mène a la <strong style="color: rgb(90, 160, 240);"><%= @question[:answers][:yes].to_s.start_with?('end') ? 'fin' : 'question' %></strong> => <%= @question[:answers][:yes] %>: "<%= MainForm::TREE[@question[:answers][:yes]][ @question[:answers][:yes].to_s.start_with?('end') ? :conclusion : :question ] %></p>
-    <p>NON : mène a la <strong style="color: rgb(90, 160, 120);"><%= @question[:answers][:no].to_s.start_with?('end') ? 'fin' : 'question' %></strong> => <%= @question[:answers][:no] %>: "<%= MainForm::TREE[@question[:answers][:no]][ @question[:answers][:no].to_s.start_with?('end') ? :conclusion : :question ] %>"</p>
+  <div style="font-size: 0.8rem;">
+    <p> <%= @main_form.answers %> </p>
+    <% if @current_question.to_s.start_with?('end') %>
+      DETAILS FIN
+    <% else %>
+      <p>question : <%= @current_question %> </p>
+      <p><%= @question %></p>
+      <div>
+        <p>OUI : mène a la <strong style="color: rgb(90, 160, 240);"><%= @question[:answers][:yes].to_s.start_with?('end') ? 'fin' : 'question' %></strong> => <%= @question[:answers][:yes] %>: "<%= MainForm::TREE[@question[:answers][:yes]][ @question[:answers][:yes].to_s.start_with?('end') ? :conclusion : :question ] %></p>
+        <p>NON : mène a la <strong style="color: rgb(90, 160, 120);"><%= @question[:answers][:no].to_s.start_with?('end') ? 'fin' : 'question' %></strong> => <%= @question[:answers][:no] %>: "<%= MainForm::TREE[@question[:answers][:no]][ @question[:answers][:no].to_s.start_with?('end') ? :conclusion : :question ] %>"</p>
+      </div>
+    <% end %>
   </div>
 </div>
 
-<% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1>EDIT STEPS</h1>
-<p>answers from this form : <%= @main_form.answers %></p>
-<p>question object : <%= @question %></p>
-<p>question  : <%= @current_question %></p>
-
-
-<h2>Question: <%= @question[:question] %></h2>
-<% if @question[:precisions] != '' %>
-  <h3>Précisions: <%= @question[:precisions] %></h3>
-<% end %>
-<div>
-  <%##= link_to main_form_answer_path,  %>
-  <p>Première option (OUI) : <%= @question[:answers][:yes] %></p>
-  <p>Seconde option (NON) : <%= @question[:answers][:no] %></p>
-
-</div>
-
-<%= form_tag(controller: "main_forms", action: "update") do %> <!-- , method: "post", input_html: { class: "form" }  -->
-  <%= radio_button_tag :answer, "#{@main_form.answers.split('_').last.to_sym}_yes_#{MainForm::TREE[@main_form.answers.split('_').last.to_sym][:answers][:yes]}" %>
-  <%= label_tag 'Oui' %>
-  <%= radio_button_tag :answer, "#{@main_form.answers.split('_').last.to_sym}_no_#{MainForm::TREE[@main_form.answers.split('_').last.to_sym][:answers][:no]}" %>
-  <%= label_tag 'Non' %>
-  <%= submit_tag 'submit' %>
-<% end %>
