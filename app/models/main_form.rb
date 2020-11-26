@@ -1,7 +1,7 @@
 class MainForm < ApplicationRecord
 
-  TREE = {
-
+  TREE =
+  {
     a: {
       question: "Êtes-vous une personne concernée ?",
       precisions: "Intermédiaire contribuable concerné, entreprise associée, toute autre personne ou entité susceptible d'être concernée par le dispositif.",
@@ -9,7 +9,7 @@ class MainForm < ApplicationRecord
       final_answer: nil
     },
     b: {
-      question: "Y a-t-il un \"Dispositif\" concerné ? À savoir un Dispositif concernant les impôts : sur les sociétés, sur le revenu, sur les successions ou le patrimoine ou les droits d'enregistrement."
+      question: "Y a-t-il un \"Dispositif\" concerné ? À savoir un Dispositif concernant les impôts : sur les sociétés, sur le revenu, sur les successions ou le patrimoine ou les droits d'enregistrement.",
       precisions: "Le Dispositif peut : être un accord ou, un montage ou un plan (définition très large) ou, être sur-mesure ou cemmercialisable ou avoir une force exécutoire.",
       answers: { yes: :c, no: :end_a },
       final_answer: nil
