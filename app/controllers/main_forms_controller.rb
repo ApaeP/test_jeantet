@@ -8,9 +8,6 @@ class MainFormsController < ApplicationController
   def create
     @main_form = MainForm.new(main_form_params)
     @main_form.save!
-    # puts "\n \n \n \n "
-    # p @main_form
-    # puts "\n \n \n \n "
     redirect_to edit_main_form_path(@main_form)
   end
 
@@ -32,7 +29,16 @@ class MainFormsController < ApplicationController
     puts "Qui mène à l'etape : #{@next_step} (#{@next_step.class})"
     puts "Object : #{@main_form.answers}"
     puts "\n \n \n \n "
-    redirect_to edit_main_form_path(@main_form)
+    if @next_step.to_s.start_with?('end')
+      redirect_to results_path(id: @main_form.id)
+    else
+      redirect_to edit_main_form_path(@main_form)
+    end
+  end
+
+  def results
+    @main_form = MainForm.find(params[:id])
+    @end = MainForm::TREE[@main_form.current_question.to_sym]
   end
 
   private
