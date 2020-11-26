@@ -2,10 +2,8 @@
   <div class="center-scaffold">
       <h2 style="text-align: center;">Êtes-vous concerné?</h2>
       <div style="display: flex; justify-content: space-evenly; width: 50vw; margin: auto;">
-        <%= link_to begin_path, remote: true, class: "main-link" do %>
-        <h1>Oui</h1>
-        <% end -%>
-          <h1>Non</h1>
+      <h3>Savez vous si vous êtes concerné par la DAC-6</h3>
+      <%= link_to "Commencer", new_main_form_path, class: 'home-button' %>
       </div>
   </div>
 </div>

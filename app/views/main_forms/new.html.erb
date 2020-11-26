@@ -1,1 +1,30 @@
-cocou
+<h1>Etape 1</h1>
+
+<div class="yo">
+  <h3 style="text-align: center;"><%= @question[:question] %></h3>
+  <% if @question[:precisions] != '' %>
+    <h4>Précisions: <%= @question[:precisions] %></h4>
+  <% end %>
+
+  <div>
+    <h2 id="button-yes" class="question_buttons">OUI</h2>
+    <h2 id="button-no" class="question_buttons">NON</h2>
+  </div>
+  <div class="container" style="align-items: center; display: none;">
+    <%= simple_form_for MainForm.new, remote: true do |f| %>
+      <div class="answer_container">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <%= f.input :answers, label: "", collection: {yes: "a_yes_b", no: "a_no_endB" }, as: :radio_buttons, input_html: { class: 'prout' } %>
+      </div>
+    <% end %>
+  </div>
+
+  <hr>
+
+  <p><%= @question %></p>
+  <div>
+    <p>OUI : mène a la <strong style="color: rgb(90, 160, 240);"><%= @question[:answers][:yes].to_s.start_with?('end') ? 'fin' : 'question' %></strong> => <%= @question[:answers][:yes] %>: "<%= MainForm::TREE[@question[:answers][:yes]][ @question[:answers][:yes].to_s.start_with?('end') ? :conclusion : :question ] %></p>
+    <p>NON : mène a la <strong style="color: rgb(90, 160, 120);"><%= @question[:answers][:no].to_s.start_with?('end') ? 'fin' : 'question' %></strong> => <%= @question[:answers][:no] %>: "<%= MainForm::TREE[@question[:answers][:no]][ @question[:answers][:no].to_s.start_with?('end') ? :conclusion : :question ] %>"</p>
+  </div>
+</div>
+

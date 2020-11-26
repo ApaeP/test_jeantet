@@ -15,3 +15,21 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+document.addEventListener('turbolinks:load', () => {
+  document.querySelector('#button-yes').addEventListener('click', (e) => {
+    document.querySelectorAll('.answer_container > div > span > label > input')[0].checked = true
+    document.querySelector('.container > form').submit()
+  });
+  document.querySelector('#button-no').addEventListener('click', (e) => {
+    document.querySelectorAll('.answer_container > div > span > label > input')[1].checked = true
+    document.querySelector('.container > form').submit()
+  });
+
+  document.querySelectorAll('.answer_container > div > span > label > input').forEach((e) => {
+    e.checked = false
+    e.addEventListener('change', () => {
+      document.querySelector('.container > form').submit()
+    });
+  });
+});
