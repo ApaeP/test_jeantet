@@ -7,6 +7,8 @@ ruby '2.6.5'
 
 gem 'simple_form'
 
+gem 'sidekiq'
+
 
 
 

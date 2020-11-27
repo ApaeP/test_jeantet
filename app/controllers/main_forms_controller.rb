@@ -17,7 +17,11 @@ class MainFormsController < ApplicationController
 
   def edit
     # Fetching the form from params
-    @main_form = MainForm.find(params[:id])
+    if params[:id].nil?
+      @main_form = MainForm.new(answers: 'a')
+    else
+      @main_form = MainForm.find(params[:id])
+    end
     # Determine the current asked question from the form
     @current_question = @main_form.current_question
     puts "\n \n \n \n "
