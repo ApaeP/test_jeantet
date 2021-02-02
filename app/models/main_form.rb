@@ -1,4 +1,13 @@
 class MainForm < ApplicationRecord
+  extend FriendlyId
+  after_create :create_name
+  friendly_id :name, use: :slugged
+
+  before_update :self_print_info
+
+  def self_print_info
+    puts "\n\n\n\n\n\n\n\n\n\n\n\nINFOS\n#{self.answers}\nINFOS\n\n\n\n\n\n\n\n\n\n\n\n"
+  end
 
   def next_step
     TREE[self.answers.split('_').last.to_sym]
@@ -28,7 +37,6 @@ class MainForm < ApplicationRecord
       print_info(self.answer)
     else
       if self.current_question != question
-        # self.answers = self.answers.split('_')[0...-3].join('_') + "_#{ question.to_s }_#{ answer.to_s }_#{ TREE[question][:answers][answer] }"
         self.answers = self.answers[0..-self.answers.match(/#{question}(.*)/)[1].length - 2] << "_#{ question.to_s }_#{ answer.to_s }_#{ TREE[question][:answers][answer] }"
       else
         if TREE[question][:answers].nil?
@@ -39,6 +47,11 @@ class MainForm < ApplicationRecord
       end
     end
     self.save
+  end
+
+  def create_name
+    chars = (('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a).shuffle
+    self.update(name: Array.new(64) { chars.sample }.join)
   end
 
 # Si j'ai Object : a_yes_b_b_no_endA

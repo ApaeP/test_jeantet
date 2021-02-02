@@ -1,5 +1,6 @@
 class MainFormsController < ApplicationController
-  before_action :find_main_form, only: [:edit, :go_back_to_previous_question, :update, :results]
+  before_action :find_main_form, only: [:edit, :update]
+  before_action :find_nested_main_form, only: [:go_back_to_previous_question, :results]
 
   def new
     @main_form = MainForm.new(answers: 'a')
@@ -10,7 +11,7 @@ class MainFormsController < ApplicationController
     @main_form = MainForm.new(main_form_params)
     @main_form.save!
     if @main_form.answers.split('_').last.start_with?('end')
-      redirect_to results_path(id: @main_form.id)
+      redirect_to main_form_results_path(@main_form)
     else
       redirect_to edit_main_form_path(@main_form)
     end
@@ -38,7 +39,7 @@ class MainFormsController < ApplicationController
     @main_form.answer(@question, @answer)
     @next_step = @main_form.answers.split('_').last.to_sym
     if @next_step.to_s.start_with?('end')
-      redirect_to results_path(id: @main_form.id)
+      redirect_to main_form_results_path(@main_form)
     else
       redirect_to edit_main_form_path(@main_form)
     end
@@ -51,10 +52,14 @@ class MainFormsController < ApplicationController
   private
 
   def main_form_params
-    params.require(:main_form).permit(:answers, :return_to_previous)
+    params.require(:main_form).permit(:answers)
+  end
+
+  def find_nested_main_form
+    @main_form = MainForm.friendly.find(params[:main_form_id])
   end
 
   def find_main_form
-    @main_form = MainForm.find(params[:id])
+    @main_form = MainForm.friendly.find(params[:id])
   end
 end

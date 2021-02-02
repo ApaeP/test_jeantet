@@ -6,7 +6,7 @@
 
   <h4 id="previous_question_button" style="padding: 1vh 2vh; background-color: lightgrey; cursor: pointer; border: 1px solid pink; color: red; border-radius: 4px;">RETOUR</h4>
 
-   <%= link_to "RETOUR", back_path(id: @main_form.id), style: "display: none;", id: "back-link" %>
+   <%= link_to "RETOUR", main_form_back_path(main_form_id: @main_form.friendly_id), style: "display: none;", id: "back-link" %>
 
   <div style="margin-bottom: 7vh;">
     <h2 id="button-yes" class="question_buttons">OUI</h2>
