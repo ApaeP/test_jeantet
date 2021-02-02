@@ -13,12 +13,10 @@ class MainForm < ApplicationRecord
   end
 
   def back_to_previous_question
-    if current_question == :b
-      puts "\n\n\n\n\nCURRENT QUESTION IS B\n\n\n\n\n"
+    if [:b, :endB].include?(current_question)
       p self.answers
       self.answers = "a"
     else
-      puts "\n\n\n\n\nCURRENT QUESTION IS #{current_question}\n\n\n\n\n"
       self.answers = self.answers.gsub(/_[^_]*_[^_]*_[^_]*\z/, '')
     end
     self.save
