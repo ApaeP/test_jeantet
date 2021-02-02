@@ -4,23 +4,35 @@ class MainForm < ApplicationRecord
     TREE[self.answers.split('_').last.to_sym]
   end
 
+  def previous_step
+    TREE[self.answers.split('_')[-3].to_sym]
+  end
+
   def current_question
     self.answers.split('_').last.to_sym
+  end
+
+  def back_to_previous_question
+    if current_question == :b
+      puts "\n\n\n\n\nCURRENT QUESTION IS B\n\n\n\n\n"
+      p self.answers
+      self.answers = "a"
+    else
+      puts "\n\n\n\n\nCURRENT QUESTION IS #{current_question}\n\n\n\n\n"
+      self.answers = self.answers.gsub(/_[^_]*_[^_]*_[^_]*\z/, '')
+    end
+    self.save
   end
 
   def answer(question, answer)
     if self.answers.nil?
       self.answers = answer
+      print_info(self.answer)
     else
       if self.current_question != question
-        # A CORRIGER !!!!!!!!!!!!!
         # self.answers = self.answers.split('_')[0...-3].join('_') + "_#{ question.to_s }_#{ answer.to_s }_#{ TREE[question][:answers][answer] }"
         self.answers = self.answers[0..-self.answers.match(/#{question}(.*)/)[1].length - 2] << "_#{ question.to_s }_#{ answer.to_s }_#{ TREE[question][:answers][answer] }"
       else
-        puts "\n \n \n \n \n ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n \n \n \n \n "
-        puts "TREE[la question a laquelle on répond][:answers] est nil ?"
-        p TREE[question][:answers].nil?
-        puts "\n \n \n \n \n ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n \n \n \n \n "
         if TREE[question][:answers].nil?
           self.answers
         else
@@ -44,7 +56,7 @@ class MainForm < ApplicationRecord
         # 1 - nil
         # 2 - a_yes_b (only a answered)(where a is the question answered, yes is the answer and b is the next question related to this answer)
         # 3 - a_yes_b_b_no_endA (a & b answered)
-        # 4 - a_yes_b_b_yes_c_c_yes_d_yes_endA (a, b, c & d answered)
+        # 4 - a_yes_b_b_yes_c_c_yes_d_d_yes_endA (a, b, c & d answered)
 
   TREE =
   {
@@ -204,35 +216,5 @@ class MainForm < ApplicationRecord
     }
   } # TREE
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

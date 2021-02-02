@@ -4,6 +4,10 @@
     <h4>Précisions: <%= @question[:precisions] %></h4>
   <% end %>
 
+  <h4 id="previous_question_button" style="padding: 1vh 2vh; background-color: lightgrey; cursor: pointer; border: 1px solid pink; color: red; border-radius: 4px;">RETOUR</h4>
+
+   <%= link_to "RETOUR", back_path(id: @main_form.id), style: "display: none;", id: "back-link" %>
+
   <div style="margin-bottom: 7vh;">
     <h2 id="button-yes" class="question_buttons">OUI</h2>
     <h2 id="button-no" class="question_buttons">NON</h2>
@@ -12,6 +16,7 @@
     <%= simple_form_for @main_form, remote: true do |f| %>
       <div class="answer_container">
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <%= hidden_field_tag :return_to_previous, false %>
         <%= f.input :answers, label: "", collection: {
           yes: "#{ @current_question }_yes_#{ @question[:answers][:yes] }",
           no: "#{ @current_question }_no_#{ @question[:answers][:no] }"
@@ -26,7 +31,8 @@
     <% if @current_question.to_s.start_with?('end') %>
       DETAILS FIN
     <% else %>
-      <p>question : <%= @current_question %> </p>
+      <p>question précédente : <%= @previous_question %></p>
+      <p>question actuelle : <%= @current_question %> </p>
       <p><%= @question %></p>
       <div>
         <p>OUI : mène a la <strong style="color: rgb(90, 160, 240);"><%= @question[:answers][:yes].to_s.start_with?('end') ? 'fin' : 'question' %></strong> => <%= @question[:answers][:yes] %>: "<%= MainForm::TREE[@question[:answers][:yes]][ @question[:answers][:yes].to_s.start_with?('end') ? :conclusion : :question ] %></p>
@@ -36,3 +42,8 @@
   </div>
 </div>
 
+<script>
+  document.querySelector('#previous_question_button').addEventListener('click', (e) => {
+    document.querySelector('#back-link').click();
+  })
+</script>
