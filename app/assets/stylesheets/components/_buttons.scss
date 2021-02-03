@@ -1,0 +1,41 @@
+#question-buttons-container {
+  margin: 3vh 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.question-buttons {
+  transition: 0.5s ease;
+  color: white;
+  padding: 20px 80px;
+  margin: 20px 10px;
+  background-color: $j-blue;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    transition: all 0.5s ease;
+    background-color: $j-blue-hover;
+  }
+}
+
+#back-button {
+  transition: 0.5s ease;
+  width: 50%;
+  text-align: center;
+  padding: 1vh 2vw;
+  background-color: $j-orange;
+  margin: 1vh auto;
+  cursor: pointer;
+  color: white;
+  border-radius: 4px;
+  &:hover {
+    transition: all 0.5s ease;
+    background-color: $j-orange-hover;
+  }
+}
+
+#back-link {
+  display: none;
+}
+

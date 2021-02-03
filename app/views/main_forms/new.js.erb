@@ -1,7 +1,0 @@
-
-var main_container = document.querySelector('.main-container')
-var first_container = document.querySelector('.scaffold')
-
-first_container.classList.add('fadeout')
-setTimeout(function(){main_container.innerHTML = '<%= j render "shared/deux", form_step: @form_step %>'}, 500);
-// main_container.innerHTML = '<%= j render "shared/deux" %>'

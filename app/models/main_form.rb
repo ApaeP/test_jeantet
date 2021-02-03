@@ -3,12 +3,6 @@ class MainForm < ApplicationRecord
   after_create :create_name
   friendly_id :name, use: :slugged
 
-  before_update :self_print_info
-
-  def self_print_info
-    puts "\n\n\n\n\n\n\n\n\n\n\n\nINFOS\n#{self.answers}\nINFOS\n\n\n\n\n\n\n\n\n\n\n\n"
-  end
-
   def next_step
     TREE[self.answers.split('_').last.to_sym]
   end
@@ -22,8 +16,7 @@ class MainForm < ApplicationRecord
   end
 
   def back_to_previous_question
-    if [:b, :endB].include?(current_question)
-      p self.answers
+    if current_question == :b || (self.answers.split('_').size == 3 && current_question.to_s.start_with?('end'))
       self.answers = "a"
     else
       self.answers = self.answers.gsub(/_[^_]*_[^_]*_[^_]*\z/, '')
