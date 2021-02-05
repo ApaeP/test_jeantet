@@ -14,7 +14,6 @@
   text-align: center;
   cursor: pointer;
   &:hover {
-    transition: all 0.5s ease;
     background-color: $j-blue-hover;
   }
 }
@@ -30,7 +29,6 @@
   color: white;
   border-radius: 4px;
   &:hover {
-    transition: all 0.5s ease;
     background-color: $j-orange-hover;
   }
 }

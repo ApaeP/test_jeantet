@@ -13,14 +13,13 @@
   </head>
 
   <body>
-    <div class="main-container" style="margin-top: 0 !important;">
-      <%= link_to root_path do %>
-        <div id="navbar">
-          <h1>Accueil</h1>
-        </div>
-      <% end %>
-      <%= yield %>
+    <%= render 'shared/navbar' %>
+    <div class="main-container">
+      <div class="main-container-2">
+        <%= yield %>
+      </div>
     </div>
+    <%= render 'shared/footer' %>
   </body>
 </html>
 

@@ -5,10 +5,11 @@
   <% end %>
   <hr>
 
-  <div>
+  <div id="question-buttons-container">
     <h2 id="button-yes" class="question-buttons">OUI</h2>
     <h2 id="button-no" class="question-buttons">NON</h2>
   </div>
+
   <div class="form-container">
     <%= simple_form_for MainForm.new, remote: true do |f| %>
       <div class="form-fields">
