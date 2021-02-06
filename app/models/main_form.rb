@@ -15,6 +15,10 @@ class MainForm < ApplicationRecord
     self.answers.split('_').last.to_sym
   end
 
+  def current_question_answers_text
+    TREE[current_question][:answers_text]
+  end
+
   def back_to_previous_question
     if current_question == :b || (self.answers.split('_').size == 3 && current_question.to_s.start_with?('end'))
       self.answers = "a"
@@ -69,91 +73,91 @@ class MainForm < ApplicationRecord
       precisions: "\"Dispositif\" : doit être entendu au sens large. Il recouvre en particulier la création, l’attribution, l’acquisition ou le transfert du revenu lui-même ou de la propriété ou du droit au titre duquel le revenu est dû.
 Il inclut également la constitution, l’acquisition ou la dissolution d’une personne morale, ou la souscription d’un instrument financier.
 Un dispositif peut être constitué d’une ou plusieurs étapes et faire intervenir un ou plusieurs participants. ",
-      answers_text: {yes: "Oui", no: "Non (le Dispositif concerne la TVA, les droits de douane ou d'accises ou les cotisations sociales)"},
+      answers_text: {yes: nil, no: "(le Dispositif concerne la TVA, les droits de douane ou d'accises ou les cotisations sociales)"},
       answers: { yes: :b, no: :endA },
     },
     b: {
       question: "Le Dispositif consiste-t-il uniquement dans le fait pour un contribuable d’attendre l’expiration d’un délai ou d’une période légale pour réaliser une transaction en exonération d’impôt ?",
       precisions: "",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :endA, no: :c },
     },
     c: {
       question: "Êtes-vous une personne concernée ?",
       precisions: "intermédiaire, contribuable concerné, entreprise associée, toute autre personne ou entité susceptible d'être concernée par le dispositif",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :d, no: :endB },
     },
     d: {
       question: "Tous les participants au Dispositif sont-ils fiscalement domiciliés ou résidents en France ou y ont-ils leur siège ?",
       precisions: "C’est-à-dire le contribuable concerné par le Dispositif, les entreprises qui lui sont associées lorsqu’elles sont actives dans le Dispositif et tout autre personne ou entité qui est active dans le Dispositif",
-      answers_text: {yes: "Oui", no: "Non (Au moins l'un des participants au Dispositif est domicilié ou résident ou a son siège en France)"},
+      answers_text: {yes: nil, no: "(Au moins l'un des participants au Dispositif est domicilié ou résident ou a son siège en France)"},
       answers: { yes: :endA, no: :e },
     },
     e: {
       question: "Au moins un des participants au Dispositif est-il fiscalement domicilié ou résident (ou a-t-il son siège) dans plusieurs États ou territoires simultanément ?",
       precisions: "",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :i, no: :f },
     },
     f: {
       question: "Au moins un des participants au Dispositif exerce-t-il une activité dans un autre État ou territoire par l'intermédiaire d'un établissement stable situé dans cet État ou territoire ?",
       precisions: "",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :g, no: :h },
     },
     g: {
       question: "Le Dispositif constitue-t-il une partie ou la totalité de l'activité de cet établissement stable ?",
       precisions: "",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :i, no: :h },
     },
     h: {
       question: "Au moins un des participants au Dispositif exerce-t-il une activité dans un autre État ou territoire sans y être fiscalement domicilié ou résident ni y disposer d'établissement stable ?",
       precisions: "",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :i, no: :endH },
     },
     i: {
       question: "Le Dispositif présente-t-il un \"marqueur\" de catégorie A ?",
       precisions: "i. e. le Dispositif (i) est soumis à une condition de confidentialité explicite ou implicite (envers d'autres intermédiaires ou des autorités fiscales), ou (ii) donne droit à des honoraires de résultats/garanties (fonction de ou corrélation à l'économie d'impôt générée), ou (iii) est commercialisable (c’est-à-dire relève-t-il d’une documentation et/ou d’une structure en grande partie normalisée et à la disposition de plus d’un contribuable concerné sans avoir besoin d’être adapté de façon importante pour être mis en œuvre)",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :j, no: :k },
     },
     j: {
       question: "Le Dispositif permet-il d'obtenir un Avantage Fiscal ?",
       precisions: " A savoir : obtenir un remboursement d’impôt, un allégement ou une diminution d’impôt, une réduction de dette fiscale, un report d’imposition ou une absence/dispense d’imposition (en France ou à l'étranger) ?",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :p, no: :endB },
     },
     k: {
       question: "Le Dispositif présente-t-il un \"Marqueur\" de catégorie B ?",
       precisions: "i. e. le Dispositif porte sur le \"commerce de pertes\", la conversion d’un revenu en un autre moindrement taxé ou des transactions circulaires",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :j, no: :l },
     },
     l: {
       question: "Le Dispositif présente-t-il un \"marqueur\" de catégorie C1 ?",
       precisions: "i. e. le Dispositif porte sur la déduction de paiements transfrontières entre entreprises associées (quasi) sans taxation corrélative ou la déduction d’amortissements pour un même actif",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :j, no: :m },
     },
     m: {
       question: "Le Dispositif présente-t-il un \"marqueur\" de catégorie C2 ?",
       precisions: "i. e. le Dispositif porte sur un allégement multiple et transfrontière de la double imposition ou un transfert d’actif d’une valeur transfrontière asymétrique",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :r, no: :n },
     },
     n: {
       question: "Le Dispositif présente-t-il un \"marqueur\" de catégorie D ?",
       precisions: "i. e. le Dispositif permet de contourner la Norme Commune de Déclaration (NCD)* ou organise une chaîne de propriété artificielle à caractère transfrontière dissimulant l’identité des bénéficiaires effectifs",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :r, no: :o },
     },
     o: {
       question: "Le Dispositif présente-t-il un \"marqueur\" de catégorie E ?",
       precisions: "i. e. le Dispositif concerne des prix de transfert : Utilisation de régimes de protection unilatéraux, transfert entre entreprises associées d’actifs incorporels difficiles à évaluer ou transferts de fonctions/risques/actifs au sein d’un groupe emportant une baisse significative du BAII",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :r, no: :endB },
     },
     p: {
@@ -162,73 +166,73 @@ Un dispositif peut être constitué d’une ou plusieurs étapes et faire interv
 p. ex. le Dispositif n'aurait pas été élaboré de la même façon sans l'existence de cet avantage :
 même si l’obtention d’un avantage fiscal principal n’est pas recherchée par le contribuable concerné, le dispositif transfrontière qu’il utilise peut néanmoins répondre au critère de l’avantage principal.
 L’importance de l’avantage fiscal est notamment déterminée en fonction de la valeur de l’avantage fiscal obtenu par rapport à la valeur des autres avantages retirés du Dispositif",
-      answers_text: {yes: "Oui : l'Avantage Fiscal est objectivement l'un des objectifs principaux du Dispositif", no: "Non : l'avantage n'est objectivement pas l'un des objectifs principaux du Dispositif"},
+      answers_text: {yes: "(l'avantage Fiscal est objectivement l'un des objectifs principaux du Dispositif)", no: "(l'avantage n'est objectivement pas l'un des objectifs principaux du Dispositif)"},
       answers: { yes: :q, no: :endB },
     },
     q: {
       question: "L’Avantage Fiscal principal obtenu en France au moyen du dispositif transfrontière résulte-t-il de l’utilisation d'une mesure d’incitation fiscale prévue par le législateur français ?",
       precisions: "L'avantage fiscal n’est pas considéré comme un Avantage Fiscal principal au sens de l’article 1649 AH du CGI si et seulement si l'intention du législateur, en créant la mesure d'incitation fiscale, est respectée dans le montage ou l'opération considérés (i. e., respect de la finalité de la mesure de faveur).",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :endB, no: :r },
     },
     r: {
-      question: "Etes-vous un intermédiaire concepteur ?",
+      question: "Êtes-vous un intermédiaire concepteur ?",
       precisions: "Un intermédiaire concepteur est une personne qui conçoit, commercialise ou organise un dispositif transfrontière devant faire l'objet d'une déclaration, le met à disposition aux fins de sa mise en oeuvre ou en gère la mise en œuvre",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :v, no: :s },
     },
     s: {
       question: "Vous êtes un intermédiaire prestataire de services / sachant",
       precisions: "Un intermédiaire prestataire de services ou sachant est une personne qui, compte tenu des faits et circonstances pertinents et sur la base des informations disponibles ainsi que de l'expertise en la matière et de la compréhension qui sont nécessaires pour fournir de tels services, sait (ou pourrait raisonnablement être censée savoir) qu'elle s'est engagée à fournir, directement ou par l'intermédiaire d'autres personnes, une aide, une assistance ou des conseils concernant la conception, la commercialisation ou l'organisation d'un dispositif transfrontière devant faire l'objet d'une déclaration, ou concernant sa mise à disposition aux fins de mise en œuvre ou la gestion de sa mise en œuvre",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :t, no: :endC },
     },
     t: {
       question: "Vous : êtes fiscalement domicilié ou résident ou avez votre siège en France (à l'exclusion de tout établissement stable), possédez en France un établissement stable qui fournit les services concernant le dispositif transfrontière déclarable, êtes constitué en France ou êtes régi par le droit français, êtes enregistré en France auprès d’un ordre ou d’une association professionnelle en rapport avec des services juridiques, fiscaux ou de conseil ou vous bénéficiez d’une autorisation d’exercer en France délivrée par cet ordre ou association.",
       precisions: "",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :u, no: :endC },
     },
     u: {
       question: "Vous satisfaites à la condition territoriale dans plusieurs États membres de l’Union européenne.",
       precisions: "",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :y, no: :v },
     },
     v: {
       question: "La déclaration de ces informations a été souscrite par un autre intermédiaire en France ou dans un autre État membre de l’UE, et vous pouvez prouver par tout moyen que ces mêmes informations ont déjà fait l’objet d’une déclaration en France ou dans un autre État membre ou que ces mêmes informations doivent être déclarées par un intermédiaire ou un contribuable concerné qui a reçu notification de son obligation déclarative, sous réserve que l’intermédiaire qui se prévaut de la dispense n’a pas reçu cette notification.",
       precisions: "",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :endE, no: :w },
     },
     w: {
       question: "Vous êtes soumis au secret professionnel (p. ex. avocat).",
       precisions: "",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :x, no: :endF },
     },
     x: {
       question: "Votre client vous autorise-t-il à déclarer ?",
       precisions: "",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :endF, no: :endI },
     },
     y: {
       question: "Vous êtes fiscalement domicilié ou résident ou avez votre siège social en France.",
       precisions: "",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :v, no: :z },
     },
     z: {
       question: "Vous êtes fiscalement domicilié ou résident ou avez siège social dans un autre Etat membre de l'UE.",
       precisions: "",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :endD, no: :aa },
     },
     aa: {
       question: "Vous disposez d'un un établissement stable dans l'UE par l’intermédiaire duquel les services concernant le Dispositif déclarable sont rendus.",
       precisions: "",
-      answers_text: {yes: "Oui", no: "Non"},
+      answers_text: {yes: nil, no: nil},
       answers: { yes: :endD, no: :endG },
     },
     endA: {

@@ -4,11 +4,17 @@
   justify-content: space-evenly;
 }
 
+.yes-no-container {
+  width: 50%;
+  text-align: center;
+}
+
 .question-buttons {
   transition: 0.5s ease;
   color: white;
+  width: 30%;
   padding: 20px 80px;
-  margin: 20px 10px;
+  margin: 20px auto;
   background-color: $j-blue;
   border-radius: 5px;
   text-align: center;

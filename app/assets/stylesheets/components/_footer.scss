@@ -1,7 +1,10 @@
 .footer {
   height: 150px;
-  background-color: rgba(144, 209, 212, 0.2);
+  transition: all ease 0.5s;
+  // border-top: 0p
+  // background-color: rgba(144, 209, 212, 0.2);
   &:hover {
-    background-color: rgba(144, 209, 212, 0.5)
+    // background-color: rgba(144, 209, 212, 0.5)
+    border-top: 10px solid $j-turquoise;
   }
 }

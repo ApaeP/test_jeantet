@@ -13,7 +13,9 @@
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
+    <%= link_to root_path do %>
+      <%= render 'shared/navbar' %>
+    <% end %>
     <div class="main-container">
       <div class="main-container-2">
         <%= yield %>

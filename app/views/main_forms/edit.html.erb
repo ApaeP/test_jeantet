@@ -7,8 +7,14 @@
   <hr>
 
   <div id="question-buttons-container">
-    <h2 id="button-yes" class="question-buttons">OUI</h2>
-    <h2 id="button-no" class="question-buttons">NON</h2>
+    <div class="yes-no-container">
+      <h2 id="button-yes" class="question-buttons">OUI</h2>
+      <p><%= @main_form.current_question_answers_text[:yes] %></p>
+    </div>
+    <div class="yes-no-container">
+      <h2 id="button-no" class="question-buttons">NON</h2>
+      <p><%= @main_form.current_question_answers_text[:no] %></p>
+    </div>
   </div>
 
   <h4 id="back-button" style="">⇠ Retour</h4>
@@ -27,20 +33,5 @@
     <% end %>
   </div>
 
-<!--   <hr>
-  <div style="font-size: 0.8rem;">
-    <p> <%#= @main_form.answers %> </p>
-    <%# if @current_question.to_s.start_with?('end') %>
-      DETAILS FIN
-    <%# else %>
-      <p>question précédente : <%#= @previous_question %></p>
-      <p>question actuelle : <%#= @current_question %> </p>
-      <p><%#= @question %></p>
-      <div>
-        <p>OUI : mène a la <strong style="color: rgb(90, 160, 240);"><%#= @question[:answers][:yes].to_s.start_with?('end') ? 'fin' : 'question' %></strong> => <%#= @question[:answers][:yes] %>: "<%#= MainForm::TREE[@question[:answers][:yes]][ @question[:answers][:yes].to_s.start_with?('end') ? :conclusion : :question ] %></p>
-        <p>NON : mène a la <strong style="color: rgb(90, 160, 120);"><%#= @question[:answers][:no].to_s.start_with?('end') ? 'fin' : 'question' %></strong> => <%#= @question[:answers][:no] %>: "<%#= MainForm::TREE[@question[:answers][:no]][ @question[:answers][:no].to_s.start_with?('end') ? :conclusion : :question ] %>"</p>
-      </div>
-    <%# end %>
-  </div> -->
 </div>
 
