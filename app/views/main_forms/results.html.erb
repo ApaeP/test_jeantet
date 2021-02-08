@@ -1,27 +1,18 @@
 <div class="hello">
 
-  <h1 style="text-align: center;">Conclusion</h1>
+  <h1>Conclusion</h1>
 
     <h4 id="back-button" style="">⇠ Retour à la question précédente</h4>
     <%= link_to "back", main_form_back_path(main_form_id: @main_form.friendly_id), id: "back-link" %>
 
-  <h3 style="text-align: center"> <%= @end[:conclusion] %> </h3>
+  <h3> <%= @end[:conclusion] %> </h3>
 
 </div>
 
-<div style="width: 80vw; margin: 5vh auto 0 auto; padding: 5px 80px; background-color: rgba(220, 220, 220, 0.2)">
+<div id="answer-recap-container">
   <h3 style="text-align: center;">Récapitulatif de vos réponses</h3>
   <% @main_form.answers.split('_').each_slice(3).with_index do |e, i| %>
     <p><%= i + 1 %> - <%= MainForm::TREE[e[0].to_sym][:question] %></p>
     <p>Votre réponse : <strong> <%= e[1] == 'yes' ? 'Oui' : 'Non' %> </strong></p>
   <% end %>
 </div>
-
-<style>
-  .hello {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 15vh;
-  }
-</style>

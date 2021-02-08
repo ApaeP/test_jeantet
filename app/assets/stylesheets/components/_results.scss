@@ -1,0 +1,13 @@
+.hello {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 15vh;
+}
+
+#answer-recap-container {
+  width: 80vw;
+  margin: 5vh auto 0 auto;
+  padding: 5px 80px;
+  background-color: rgba(220, 220, 220, 0.2);
+}
