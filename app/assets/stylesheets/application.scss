@@ -29,7 +29,24 @@ html::-webkit-scrollbar {
 body {
   font-family: $j-font;
   margin: 0;
+  background-color: rgb(10, 30, 70);
+  color: white;
 }
 
+a {
+  &:link {
+    text-decoration: none;
+  }
 
+  &:visited {
+    text-decoration: none;
+  }
 
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:active {
+    text-decoration: none;
+  }
+}

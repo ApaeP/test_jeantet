@@ -1,20 +1,22 @@
 #navbar {
-  height: 150px;
+  height: 60px;
   margin-top: 0 !important;
   display: flex;
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
-  color: $j-orange;
+}
+
+.inner-navbar {
+  display: flex;
+  height: 40px;
+}
+
+#navbar-logo {
   transition: 0.65s all ease;
-  text-align: center;
-  border-bottom: 0px $j-blue solid;
-  // background-color: rgba(144, 209, 212, 0.2);
+  height: 40px;
+  margin: 0 10px;
   &:hover {
-  border-bottom: 10px $j-blue solid;
-    // background-color: rgba(144, 209, 212, 0.5)
-  }
-  &:visited {
-    text-decoration: none;
+    scale: 1.05;
   }
 }
