@@ -1,7 +1,7 @@
+<h4 id="back-button" style="">⇠ Retour</h4>
+<%= link_to "back", main_form_back_path(main_form_id: @main_form.friendly_id), id: "back-link" %>
 <div id="question-card">
   <%= render 'question_card', question: @question, main_form: @main_form %>
-  <h4 id="back-button" style="">⇠ Retour</h4>
-  <%= link_to "back", main_form_back_path(main_form_id: @main_form.friendly_id), id: "back-link" %>
   <div class="form-container">
     <%= simple_form_for @main_form, remote: true do |f| %>
       <div class="form-fields">

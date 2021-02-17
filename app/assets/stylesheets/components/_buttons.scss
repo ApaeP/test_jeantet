@@ -10,36 +10,55 @@
 }
 
 .question-buttons {
-  transition: 0.5s ease;
+  transition: 0.3s ease;
   width: 30%;
   padding: 20px 80px;
   margin: 20px auto;
   text-align: center;
   cursor: pointer;
+  &:hover {
+    border-radius: 5px;
+  }
 }
 #button-yes {
-  background-color: $j-turquoise-hover;
+  background-color: $j-turquoise;
   &:hover {
-    background-color: $j-turquoise;
+    background-color: $j-turquoise-hover;
   }
 }
 #button-no {
-  background-color: $j-orange-hover;
+  background-color: $j-orange;
   &:hover {
-    background-color: $j-orange;
+    background-color: $j-orange-hover;
   }
 }
 
-#back-button {
+#back-button-results {
   transition: 0.5s ease;
   width: 50%;
   text-align: center;
   padding: 1vh 2vw;
-  background-color: $j-orange;
+  background-color: $j-blue-hover;
   margin: 1vh auto;
   cursor: pointer;
   &:hover {
-    background-color: $j-orange-hover;
+    background-color: $j-blue;
+  }
+}
+#back-button {
+  transition: 0.3s ease;
+  width: 10%;
+  text-align: left;
+  padding: 1vh 2vw;
+  background-color: $j-blue;
+  margin: 1vh auto;
+  cursor: pointer;
+  position: unset;
+  margin: 0 95% 0vh 5%;
+  // border-radius: 9px 9px 0 0;
+  &:hover {
+    border-radius: 9px 9px 0 0;
+    background-color: $j-blue-hover;
   }
 }
 
