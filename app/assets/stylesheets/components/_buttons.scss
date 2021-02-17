@@ -11,16 +11,22 @@
 
 .question-buttons {
   transition: 0.5s ease;
-  color: white;
   width: 30%;
   padding: 20px 80px;
   margin: 20px auto;
-  background-color: $j-blue;
-  // border-radius: 5px;
   text-align: center;
   cursor: pointer;
+}
+#button-yes {
+  background-color: $j-turquoise-hover;
   &:hover {
-    background-color: $j-blue-hover;
+    background-color: $j-turquoise;
+  }
+}
+#button-no {
+  background-color: $j-orange-hover;
+  &:hover {
+    background-color: $j-orange;
   }
 }
 
@@ -32,8 +38,6 @@
   background-color: $j-orange;
   margin: 1vh auto;
   cursor: pointer;
-  color: white;
-  border-radius: 4px;
   &:hover {
     background-color: $j-orange-hover;
   }

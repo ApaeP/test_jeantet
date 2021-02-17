@@ -1,21 +1,5 @@
 <div id="question-card">
-  <h3 style="text-align: center;"><%= sanitize @question[:question] %></h3>
-  <% if @question[:precisions] != '' %>
-    <h4><%= @question[:precisions] %></h4>
-  <% end %>
-  <hr>
-
-  <div id="question-buttons-container">
-    <div class="yes-no-container">
-      <h2 id="button-yes" class="question-buttons">OUI</h2>
-      <p><%= @main_form.current_question_answers_text[:yes] %></p>
-    </div>
-    <div class="yes-no-container">
-      <h2 id="button-no" class="question-buttons">NON</h2>
-      <p><%= @main_form.current_question_answers_text[:no] %></p>
-    </div>
-  </div>
-
+  <%= render 'question_card', question: @question, main_form: @main_form %>
   <div class="form-container">
     <%= simple_form_for MainForm.new, remote: true do |f| %>
       <div class="form-fields">
@@ -24,6 +8,5 @@
       </div>
     <% end %>
   </div>
-
 </div>
 

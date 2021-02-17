@@ -1,0 +1,17 @@
+<p class="main-question"><%= sanitize question[:question] %></p>
+<% if question[:precisions] != '' %>
+  <p class="question-precisions"><%= sanitize question[:precisions] %></p>
+<% end %>
+
+<hr>
+
+<div id="question-buttons-container">
+  <div class="yes-no-container">
+    <h2 id="button-yes" class="question-buttons">OUI</h2>
+    <p><%= main_form.current_question_answers_text[:yes] %></p>
+  </div>
+  <div class="yes-no-container">
+    <h2 id="button-no" class="question-buttons">NON</h2>
+    <p><%= main_form.current_question_answers_text[:no] %></p>
+  </div>
+</div>
